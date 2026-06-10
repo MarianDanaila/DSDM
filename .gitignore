@@ -1,0 +1,26 @@
+# Local properties (contains your machine's SDK path - never commit this)
+local.properties
+
+# Gradle build outputs
+build/
+.gradle/
+
+# Android Studio IDE files
+*.iml
+.idea/
+*.iws
+*.ipr
+
+# Kotlin build files
+.kotlin/
+
+# App build outputs
+app/build/
+
+# Keystore files (sensitive - never commit these)
+*.jks
+*.keystore
+
+# OS files
+.DS_Store
+Thumbs.db
