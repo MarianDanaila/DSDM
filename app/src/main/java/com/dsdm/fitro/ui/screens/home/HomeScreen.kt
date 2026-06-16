@@ -54,6 +54,13 @@ fun HomeScreen(navController: NavController) {
                 Text("My Workouts")
             }
 
+            Button(
+                onClick = { navController.navigate(Routes.EXERCISES) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Browse Exercises")
+            }
+
             OutlinedButton(
                 onClick = { navController.navigate(Routes.SETTINGS) },
                 modifier = Modifier.fillMaxWidth()

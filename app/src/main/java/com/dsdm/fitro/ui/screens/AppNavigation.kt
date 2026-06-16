@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dsdm.fitro.ui.screens.exercises.ExercisesScreen
 import com.dsdm.fitro.ui.screens.home.HomeScreen
 import com.dsdm.fitro.ui.screens.login.LoginScreen
 import com.dsdm.fitro.ui.screens.register.RegisterScreen
@@ -45,6 +46,9 @@ fun AppNavigation() {
         }
         composable(Routes.SETTINGS) {
             SettingsScreen(navController)
+        }
+        composable(Routes.EXERCISES) {
+            ExercisesScreen(navController)
         }
     }
 }
