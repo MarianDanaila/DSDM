@@ -5,11 +5,55 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.dsdm.fitro.ui.screens.Routes
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Home Screen")
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text("FitTrack") })
+        }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = "Welcome!",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "Track your fitness journey",
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Button(
+                onClick = { navController.navigate(Routes.WORKOUT) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("My Workouts")
+            }
+
+            OutlinedButton(
+                onClick = { navController.navigate(Routes.SETTINGS) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Settings")
+            }
+        }
     }
 }
