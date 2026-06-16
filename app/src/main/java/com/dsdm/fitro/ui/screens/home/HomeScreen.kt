@@ -2,18 +2,24 @@ package com.dsdm.fitro.ui.screens.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.dsdm.fitro.ui.screens.Routes
+import com.dsdm.fitro.util.PreferencesManager
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
+    val context = LocalContext.current
+    val prefs = remember { PreferencesManager(context) }
+    val displayName = prefs.getDisplayName()
+
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("FitTrack") })
@@ -30,7 +36,7 @@ fun HomeScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
-                text = "Welcome!",
+                text = if (displayName.isNotBlank()) "Welcome, $displayName!" else "Welcome!",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold
             )
