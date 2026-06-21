@@ -22,6 +22,7 @@ import com.dsdm.fitro.data.remote.model.ExerciseResponse
 fun ExercisesScreen(navController: NavController) {
     val viewModel: ExercisesViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
+    val categoryCount by viewModel.categoryCount.collectAsState()
 
     Scaffold(
         topBar = {
@@ -58,6 +59,16 @@ fun ExercisesScreen(navController: NavController) {
                         contentPadding = PaddingValues(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
+                        if (categoryCount > 0) {
+                            item {
+                                Text(
+                                    text = "$categoryCount categories available",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = androidx.compose.ui.Modifier.padding(bottom = 4.dp)
+                                )
+                            }
+                        }
                         items(state.exercises) { exercise ->
                             ExerciseCard(exercise)
                         }

@@ -19,8 +19,12 @@ class ExercisesViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<ExercisesUiState>(ExercisesUiState.Loading)
     val uiState: StateFlow<ExercisesUiState> = _uiState
 
+    private val _categoryCount = MutableStateFlow(0)
+    val categoryCount: StateFlow<Int> = _categoryCount
+
     init {
         fetchExercises()
+        fetchCategories()
     }
 
     fun fetchExercises() {
@@ -32,6 +36,17 @@ class ExercisesViewModel : ViewModel() {
                 _uiState.value = ExercisesUiState.Success(validExercises)
             } catch (e: Exception) {
                 _uiState.value = ExercisesUiState.Error("Failed to load exercises. Check your connection.")
+            }
+        }
+    }
+
+    private fun fetchCategories() {
+        viewModelScope.launch {
+            try {
+                val response = RetrofitClient.exerciseApi.getCategories()
+                _categoryCount.value = response.count
+            } catch (e: Exception) {
+                // categories are supplementary, silently ignore errors
             }
         }
     }
