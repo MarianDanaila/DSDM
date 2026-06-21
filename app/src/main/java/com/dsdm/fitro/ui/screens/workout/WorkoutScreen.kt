@@ -79,6 +79,13 @@ fun WorkoutCard(workout: WorkoutEntity, onDelete: () -> Unit) {
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                if (workout.exercises.isNotBlank()) {
+                    Text(
+                        text = "Exercises: ${workout.exercises}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
             IconButton(onClick = onDelete) {
                 Icon(Icons.Default.Delete, contentDescription = "Delete")

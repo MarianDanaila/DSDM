@@ -21,14 +21,15 @@ class WorkoutViewModel(application: Application) : AndroidViewModel(application)
     val workouts: StateFlow<List<WorkoutEntity>> = repository.getAllWorkouts()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    fun addWorkout(name: String, type: String, durationMinutes: Int) {
+    fun addWorkout(name: String, type: String, durationMinutes: Int, exercises: List<String> = emptyList()) {
         viewModelScope.launch {
             repository.insertWorkout(
                 WorkoutEntity(
                     name = name,
                     type = type,
                     durationMinutes = durationMinutes,
-                    date = LocalDate.now().toString()
+                    date = LocalDate.now().toString(),
+                    exercises = exercises.joinToString(", ")
                 )
             )
         }
